@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guida operativa CAD · Fillet/Raccordo — CoForma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#0f1c2e; --teal:#0a7f8c; --muted:#5a6573; --line:#dce2ea; --bg:#f3f5f8; }
+    body { margin:0; font-family:"IBM Plex Sans",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.5; }
+    main { max-width:720px; margin:0 auto; padding:32px 20px 48px; }
+    a { color:var(--teal); }
+    h1 { font-size:1.4rem; margin:0 0 8px; }
+    .meta { font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--muted); margin-bottom:24px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; }
+    ol { margin:0; padding-left:1.2rem; }
+    li { margin-bottom:10px; }
+    .note { margin-top:16px; padding:12px; background:#e8f4f6; border-radius:8px; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="../../index.html">← Torna a CoForma</a></p>
+    <h1>Guida operativa CAD · Fillet / Raccordo</h1>
+    <p class="meta">Procedura tool nativa · Affidabilità 4/5</p>
+    <div class="card">
+      <ol>
+        <li>Seleziona lo spigolo alla base della clip (zona hotspot).</li>
+        <li>Avvia il comando nativo <strong>Fillet / Raccordo</strong> nel CAD (es. Shapr3D).</li>
+        <li>Imposta raggio <strong>≥ 1.2 mm</strong> seguendo la sagoma guida CoForma.</li>
+        <li>Conferma e ricontrolla la zona evidenziata nella diagnosi.</li>
+      </ol>
+      <p class="note">CoForma non esegue il raccordo al posto tuo: ti guida nel tool nativo. Dopo il fillet, rivaluta warning e trade-off.</p>
+    </div>
+  </main>
+</body>
+</html>

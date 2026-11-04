@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoForma — Tasto Microonde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Vai al contenuto</a>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/logo-coforma.png" alt="CoForma">
+      </div>
+
+      <div class="project">
+        <div class="project-path">
+          <span>InterAct</span>
+          <span class="sep" aria-hidden="true">/</span>
+          <span>Prototype</span>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current">Tasto Microonde</span>
+        </div>
+        <div class="project-title">
+          <span class="live" title="Sessione attiva" aria-hidden="true"></span>
+          <h1>Tasto Microonde.3mf</h1>
+          <span class="badge soft">Rev A</span>
+          <span class="badge">Companion CAD</span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn ghost" href="examples/Tasto-Microonde.3mf" download>
+          <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1.5a.75.75 0 0 1 .75.75v6.19l1.97-1.97a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.53a.75.75 0 0 1 1.06-1.06l1.97 1.97V2.25A.75.75 0 0 1 8 1.5ZM2.75 11a.75.75 0 0 1 .75.75v1h9.5v-1a.75.75 0 0 1 1.5 0v1.75c0 .69-.56 1.25-1.25 1.25h-10C2.56 14.75 2 14.19 2 13.5v-1.75a.75.75 0 0 1 .75-.75Z"/></svg>
+          Scarica 3MF
+        </a>
+        <button type="button" class="btn quiet" id="save-session">Salva sessione</button>
+        <button type="button" class="btn primary" id="chat-toggle" aria-expanded="false" aria-controls="chat-panel">
+          Assistente
+          <span class="chat-dot" aria-hidden="true"></span>
+        </button>
+        <span id="save-status" class="sr-only" role="status" aria-live="polite"></span>
+      </div>
+    </header>
+
+    <nav class="steps" aria-label="Fasi del flusso CoForma">
+      <ol class="step-rail">
+        <li>
+          <button type="button" class="step is-on" data-go="priorities" aria-current="step">
+            <span class="step-num">01</span>
+            <span class="step-copy"><strong>Priorità</strong><em>Vincoli dichiarati</em></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="step" data-go="variants">
+            <span class="step-num">02</span>
+            <span class="step-copy"><strong>Varianti</strong><em>Strategie confrontabili</em></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="step" data-go="warning">
+            <span class="step-num">03</span>
+            <span class="step-copy"><strong>Diagnosi</strong><em>Rischi sul pezzo</em></span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="step" data-go="tradeoff">
+            <span class="step-num">04</span>
+            <span class="step-copy"><strong>Trade-off</strong><em>Calibrazione & export</em></span>
+          </button>
+        </li>
+      </ol>
+    </nav>
+
+    <main id="main" class="workspace">
+      <!-- 01 -->
+      <section class="screen is-on" id="screen-priorities" aria-labelledby="title-priorities">
+        <h2 id="title-priorities" class="sr-only">Imposta le priorità sul tasto microonde</h2>
+
+        <div class="split" data-split="priorities" style="--left: 248px; --right: 320px;">
+          <aside class="pane" id="pane-workspace">
+            <div class="pane-head">
+              <p class="pane-title">Workspace</p>
+              <span class="chip">1 pezzo</span>
+            </div>
+            <ul class="nav-list" role="list">
+              <li>
+                <button type="button" class="nav-item is-active" data-nav="model" aria-current="page">
+                  <span class="nav-ico" aria-hidden="true"></span>
+                  <span>
+                    <strong>Tasto Microonde.3mf</strong>
+                    <em>Mesh attiva</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="nav-item" data-nav="history">
+                  <span class="nav-ico soft" aria-hidden="true"></span>
+                  <span>
+                    <strong>Cronologia decisioni</strong>
+                    <em>0 eventi</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="nav-item" data-nav="params">
+                  <span class="nav-ico soft" aria-hidden="true"></span>
+                  <span>
+                    <strong>Parametri aperti</strong>
+                    <em>3 vincoli</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="nav-item" data-nav="notes">
+                  <span class="nav-ico soft" aria-hidden="true"></span>
+                  <span>
+                    <strong>Note di team</strong>
+                    <em>Condivise</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="nav-item" data-nav="export">
+                  <span class="nav-ico soft" aria-hidden="true"></span>
+                  <span>
+                    <strong>Export</strong>
+                    <em>Bloccato</em>
+                  </span>
+                </button>
+              </li>
+            </ul>
+            <div id="workspace-panel" class="workspace-panel" role="region" aria-live="polite" hidden>
+              <p class="workspace-panel-title" id="workspace-panel-title"></p>
+              <p class="workspace-panel-body" id="workspace-panel-body"></p>
+            </div>
+            <div class="file-meta">
+              <div><span>Origine</span><strong>Shapr3D → 3MF</strong></div>
+              <div><span>Layer</span><strong>0.20 mm · Ø0.4</strong></div>
+              <div><span>Mesh</span><strong>9 118 vtx · 18 232 facce</strong></div>
+              <div><span>BBox</span><strong>~80 × 26 × 20 mm</strong></div>
+            </div>
+          </aside>
+
+          <button type="button" class="splitter" data-split-edge="left" aria-label="Ridimensiona Workspace e Vista modello" aria-orientation="vertical"></button>
+
+          <section class="pane canvas-pane" id="pane-model">
+            <div class="pane-head">
+              <div>
+                <p class="pane-title">Vista modello</p>
+                <p class="pane-sub">Orbit · Perspective · Studio light</p>
+              </div>
+              <div class="view-tools" role="group" aria-label="Controlli vista">
+                <button type="button" class="tool is-on" data-view="persp" aria-pressed="true">Persp</button>
+                <button type="button" class="tool" data-view="ortho" aria-pressed="false">Ortho</button>
+                <button type="button" class="tool" id="reset-camera" title="Reimposta vista" aria-label="Reimposta vista 3D">Fit</button>
+              </div>
+            </div>
+            <div class="viewport" id="viewer-host" role="img" aria-label="Anteprima 3D del tasto microonde">
+              <div class="viewport-grid" aria-hidden="true"></div>
+              <canvas id="viewer" tabindex="0" aria-label="Canvas 3D interattivo. Trascina per ruotare."></canvas>
+              <img class="fallback" id="viewer-fallback" src="examples/previews/plate_1.png" alt="Anteprima del pezzo Tasto Microonde stampato in 3D">
+              <div class="viewport-hud">
+                <span>XYZ mm</span>
+                <span id="viewer-hint">Caricamento modello…</span>
+              </div>
+            </div>
+            <ul class="tags">
+              <li><span class="tag-k">Stato</span> Bozza</li>
+              <li><span class="tag-k">Feature</span> Snap-fit + boss</li>
+              <li><span class="tag-k">Asset</span> Tasto-Microonde.3mf</li>
+            </ul>
+          </section>
+
+          <button type="button" class="splitter" data-split-edge="right" aria-label="Ridimensiona Vista modello e Priorities" aria-orientation="vertical"></button>
+
+          <aside class="pane side-pane" id="pane-priorities">
+            <div class="pane-head">
+              <p class="pane-title">Priorities</p>
+              <span class="chip warn">Obbligatorie</span>
+            </div>
+            <p class="help">Dichiara la gerarchia prima di generare alternative. Niente blocco chiuso senza vincoli espliciti.</p>
+
+            <div class="priority-stack">
+              <label class="priority">
+                <span><strong>Resistenza clip</strong><em id="lab-res">alta</em></span>
+                <input type="range" id="pri-res" min="1" max="5" value="5" aria-valuetext="alta">
+                <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              </label>
+              <label class="priority">
+                <span><strong>Assemblaggio</strong><em id="lab-asm">alta</em></span>
+                <input type="range" id="pri-asm" min="1" max="5" value="4" aria-valuetext="alta">
+                <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              </label>
+              <label class="priority">
+                <span><strong>Estetica</strong><em id="lab-est">bassa</em></span>
+                <input type="range" id="pri-est" min="1" max="5" value="2" aria-valuetext="bassa">
+                <div class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              </label>
+            </div>
+
+            <div class="pane-footer">
+              <p class="micro">Le priorità guidano il ranking delle Strategy.</p>
+              <button type="button" class="btn primary" data-go="variants">Continua alle varianti</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section class="screen" id="screen-variants" hidden aria-labelledby="title-variants">
+        <h2 id="title-variants" class="sr-only">Tre varianti per il tasto microonde</h2>
+
+        <div class="variants-gallery" id="variants-gallery">
+          <div class="variants-gallery-head">
+            <div>
+              <p class="pane-title">Strategie confrontabili</p>
+              <p class="help">Apri una strategia alla volta con l’assistente. Confronta le caratteristiche e seleziona prima della diagnosi.</p>
+            </div>
+            <span class="chip">3 opzioni · 1 aperta alla volta</span>
+          </div>
+
+          <div class="strategy-cards" role="list">
+            <article class="strategy-card" role="listitem" data-strategy="1">
+              <header>
+                <div class="strategy-top">
+                  <p class="eyebrow">Strategy 01</p>
+                  <span class="score">Fit 62</span>
+                </div>
+                <h3>Clip aggressiva</h3>
+                <p class="variant-tag">Inserimento rapido</p>
+              </header>
+              <dl class="strategy-teaser">
+                <div><dt>What</dt><dd>Ganci più lunghi, base sottile</dd></div>
+                <div><dt>Why</dt><dd>Inserimento rapido nel frontalino</dd></div>
+                <div><dt>Pros</dt><dd>Montaggio veloce · pochi gesti</dd></div>
+                <div><dt>Cons</dt><dd>Rischio rottura clip allo scatto</dd></div>
+              </dl>
+              <div class="strategy-card-actions">
+                <button type="button" class="btn primary wide open-variant" data-strategy="1" aria-haspopup="dialog">Apri con Assistente</button>
+                <button type="button" class="btn quiet wide pick" data-go="warning" data-strategy="1">Seleziona</button>
+              </div>
+            </article>
+
+            <article class="strategy-card is-pick is-recommended" role="listitem" data-strategy="2">
+              <header>
+                <div class="strategy-top">
+                  <p class="eyebrow">Strategy 02 · consigliata</p>
+                  <span class="score good">Fit 91</span>
+                </div>
+                <h3>Clip + boss bilanciati</h3>
+                <p class="variant-tag">Tenuta e montaggio</p>
+              </header>
+              <dl class="strategy-teaser">
+                <div><dt>What</dt><dd>Ganci medi, boss rinforzati, raccordo alla base</dd></div>
+                <div><dt>Why</dt><dd>Allinea a resistenza clip e assemblaggio</dd></div>
+                <div><dt>Pros</dt><dd>Tenuta e montaggio sostenibili</dd></div>
+                <div><dt>Cons</dt><dd>Leggero aumento di materiale</dd></div>
+              </dl>
+              <div class="strategy-card-actions">
+                <button type="button" class="btn primary wide open-variant" data-strategy="2" aria-haspopup="dialog">Apri con Assistente</button>
+                <button type="button" class="btn quiet wide pick" data-go="warning" data-strategy="2">Seleziona</button>
+              </div>
+            </article>
+
+            <article class="strategy-card" role="listitem" data-strategy="3">
+              <header>
+                <div class="strategy-top">
+                  <p class="eyebrow">Strategy 03</p>
+                  <span class="score">Fit 48</span>
+                </div>
+                <h3>Alleggerita</h3>
+                <p class="variant-tag">Meno materiale</p>
+              </header>
+              <dl class="strategy-teaser">
+                <div><dt>What</dt><dd>Pareti alleggerite, boss più corti</dd></div>
+                <div><dt>Why</dt><dd>Meno filamento e tempo macchina</dd></div>
+                <div><dt>Pros</dt><dd>Leggera · economica</dd></div>
+                <div><dt>Cons</dt><dd>Flessione sulla base sotto carico</dd></div>
+              </dl>
+              <div class="strategy-card-actions">
+                <button type="button" class="btn primary wide open-variant" data-strategy="3" aria-haspopup="dialog">Apri con Assistente</button>
+                <button type="button" class="btn quiet wide pick" data-go="warning" data-strategy="3">Seleziona</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="variant-explorer" id="variant-explorer" hidden role="dialog" aria-modal="true" aria-labelledby="vx-title">
+          <header class="variant-explorer-bar">
+            <div class="variant-explorer-bar-copy">
+              <p class="eyebrow" id="vx-eyebrow">Strategy 02 · consigliata</p>
+              <h3 id="vx-title">Clip + boss bilanciati</h3>
+            </div>
+            <div class="variant-explorer-bar-actions">
+              <span class="score good" id="vx-score">Fit 91</span>
+              <button type="button" class="btn quiet pick" id="vx-select" data-go="warning" data-strategy="2">Seleziona</button>
+              <button type="button" class="tool" id="vx-close" aria-label="Chiudi vista strategy">Chiudi</button>
+            </div>
+          </header>
+
+          <div class="split variants-explorer-split" data-split="variant-explorer" style="--right: 360px;">
+            <section class="pane variants-detail-pane" id="variant-detail" aria-live="polite">
+              <p class="variant-tag" id="vx-tag">Tenuta e montaggio</p>
+              <div class="variant-sections" id="variant-sections"></div>
+            </section>
+
+            <button type="button" class="splitter" data-split-edge="right" aria-label="Ridimensiona caratteristiche e assistente" aria-orientation="vertical"></button>
+
+            <aside class="pane variants-chat-pane" aria-label="Assistente sulla variante aperta">
+              <div class="pane-head">
+                <div>
+                  <p class="pane-title">Assistente</p>
+                  <p class="pane-sub" id="variants-chat-context">Contestuale · Strategy 02</p>
+                </div>
+                <span class="chip">Fonti</span>
+              </div>
+
+              <div class="chat-policy compact" role="note">
+                <strong>Policy fonti</strong>
+                Ogni risposta cita riferimento, affidabilità e link apribile.
+              </div>
+
+              <div class="chat-thread embedded" id="chat-thread-variants" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+              <div class="chat-suggestions" id="chat-suggestions-variants" aria-label="Domande sulla strategy aperta">
+                <button type="button" class="suggest suggest-variant" data-q="Perché questa strategy ha questo Fit score?">Fit score</button>
+                <button type="button" class="suggest suggest-variant" data-q="Quali rischi geometrici ha questa variante?">Rischi</button>
+                <button type="button" class="suggest suggest-variant" data-q="Quando dovrei scegliere questa strategy?">Quando sceglierla</button>
+                <button type="button" class="suggest suggest-variant" data-q="Come si confronta con le altre strategy?">Confronto</button>
+              </div>
+
+              <form class="chat-compose embedded" id="chat-form-variants">
+                <label class="sr-only" for="chat-input-variants">Messaggio sull’assistente variante</label>
+                <textarea id="chat-input-variants" rows="2" placeholder="Chiedi su questa strategy…" required maxlength="500"></textarea>
+                <button type="submit" class="btn primary" id="chat-send-variants">Invia</button>
+              </form>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section class="screen" id="screen-warning" hidden aria-labelledby="title-warning">
+        <h2 id="title-warning" class="sr-only">Diagnosi sul tasto microonde</h2>
+        <div class="split" data-split="warning" style="--left: 300px; --right: 0px;">
+          <aside class="pane">
+            <div class="pane-head">
+              <p class="pane-title">Warnings</p>
+              <span class="chip danger">4 aperti</span>
+            </div>
+            <ol class="warn-list" id="warn-list">
+              <li>
+                <button type="button" class="warn-item is-active">
+                  <span class="sev high">Alta</span>
+                  <span>
+                    <strong>Flessione alla radice della clip</strong>
+                    <em>Geometria · stima</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="warn-item">
+                  <span class="sev mid">Media</span>
+                  <span>
+                    <strong>Parete base sotto soglia</strong>
+                    <em>Spessore locale</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="warn-item">
+                  <span class="sev mid">Media</span>
+                  <span>
+                    <strong>Ovalizzazione boss al serraggio</strong>
+                    <em>Assemblaggio</em>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="warn-item">
+                  <span class="sev low">Info</span>
+                  <span>
+                    <strong>Comando CAD da apprendere</strong>
+                    <em>Fillet / Raccordo</em>
+                  </span>
+                </button>
+              </li>
+            </ol>
+            <button type="button" class="text-link" id="see-all-warnings">Vedi tutti i warning</button>
+            <p class="help" id="warnings-extra" hidden>Elenco completo collegato al pezzo 3MF: clip, base, boss e fonti parametriche. Ogni warning richiede una decisione esplicita prima dell’export.</p>
+          </aside>
+
+          <button type="button" class="splitter" data-split-edge="left" aria-label="Ridimensiona Warnings e Diagnosi" aria-orientation="vertical"></button>
+
+          <section class="pane canvas-pane">
+            <div class="pane-head">
+              <div>
+                <p class="pane-title">Diagnosi sul pezzo</p>
+                <p class="pane-sub">Hotspot sulla radice della clip sinistra</p>
+              </div>
+            </div>
+            <div class="viewport has-warning">
+              <div class="viewport-grid" aria-hidden="true"></div>
+              <img src="examples/previews/plate_1.png" alt="Tasto Microonde con zona critica sulla clip">
+              <span class="hotspot" aria-hidden="true"></span>
+              <aside class="callout" aria-live="polite">
+                <p class="eyebrow danger">Warning · severità alta</p>
+                <p>Alla radice della clip lo spessore rischia di cedere allo scatto. Raccordo consigliato ≥ <strong>1.2 mm</strong>.</p>
+                <p class="meta">Incertezza media · stima geometrica sul 3MF · non sostituisce prova fisica</p>
+              </aside>
+            </div>
+            <div class="row-actions">
+              <button type="button" class="btn quiet" data-go="variants">Cambia variante</button>
+              <button type="button" class="btn primary" id="guide-btn" aria-expanded="false" aria-controls="guide">Guida il comando</button>
+              <button type="button" class="btn quiet" data-go="tradeoff">Vai ai trade-off</button>
+            </div>
+            <div class="guide" id="guide" hidden>
+              <p class="pane-title">Sequenza nativa CAD</p>
+              <p class="help">CoForma non esegue il raccordo al posto tuo: ti guida nel tool nativo.</p>
+              <ol>
+                <li>Seleziona lo spigolo alla base della clip</li>
+                <li>Avvia <strong>Fillet / Raccordo</strong></li>
+                <li>Imposta <strong>1.2 mm</strong> seguendo la sagoma guida</li>
+                <li>Conferma e ricontrolla la zona evidenziata</li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section class="screen" id="screen-tradeoff" hidden aria-labelledby="title-tradeoff">
+        <h2 id="title-tradeoff" class="sr-only">Trade-off e export del tasto microonde</h2>
+        <div class="split" data-split="tradeoff" style="--left: 280px; --right: 320px;">
+          <aside class="pane">
+            <div class="pane-head">
+              <p class="pane-title">Fonti</p>
+              <span class="chip">Affidabilità 3/5</span>
+            </div>
+            <div class="source-card">
+              <p class="source-kicker">Scheda laboratorio</p>
+              <p><strong>PLA / PETG</strong> — prototipo snap-fit</p>
+              <p class="meta">Valori indicativi di flessione/trazione. Non sostituiscono una prova sul pezzo reale.</p>
+              <button type="button" class="btn quiet wide" id="toggle-source" aria-expanded="false" aria-controls="source-body">Apri scheda fonte</button>
+            </div>
+            <div class="source-body" id="source-body" hidden>
+              <ul class="source-facts">
+                <li><span>Contesto</span><strong>Clip stampate FDM</strong></li>
+                <li><span>Layer tipico</span><strong>0.20 mm</strong></li>
+                <li><span>Uso</span><strong>Solo ranking interno</strong></li>
+              </ul>
+            </div>
+            <a class="btn ghost wide" href="examples/Tasto-Microonde.3mf" download>Scarica pezzo .3mf</a>
+          </aside>
+
+          <button type="button" class="splitter" data-split-edge="left" aria-label="Ridimensiona Fonti e Trade-off" aria-orientation="vertical"></button>
+
+          <section class="pane canvas-pane">
+            <div class="pane-head">
+              <div>
+                <p class="pane-title">Trade-off in tempo reale</p>
+                <p class="pane-sub">Un parametro alla volta · gli altri restano bloccati</p>
+              </div>
+            </div>
+            <div class="meters">
+              <div class="meter-block">
+                <div class="meter-head"><span>Resistenza clip</span><strong id="meter-res-label">alta</strong></div>
+                <div class="meter" aria-hidden="true"><i id="meter-res" style="width:78%"></i></div>
+              </div>
+              <div class="meter-block">
+                <div class="meter-head"><span>Tempo / materiale</span><strong id="meter-cost-label">medio</strong></div>
+                <div class="meter teal" aria-hidden="true"><i id="meter-cost" style="width:52%"></i></div>
+              </div>
+            </div>
+            <label class="param">
+              <span>Spessore radice clip <strong id="thick-label">1.6 mm</strong></span>
+              <input type="range" id="thick" min="10" max="25" value="16" aria-valuetext="1.6 millimetri">
+              <small>Calibrazione granulare sul nodo critico. Range 1.0–2.5 mm.</small>
+            </label>
+          </section>
+
+          <button type="button" class="splitter" data-split-edge="right" aria-label="Ridimensiona Trade-off e Check export" aria-orientation="vertical"></button>
+
+          <aside class="pane side-pane">
+            <div class="pane-head">
+              <p class="pane-title">Check pre-export</p>
+              <span class="chip" id="gate-count">0/3</span>
+            </div>
+            <label class="check"><input type="checkbox" class="gate"> So perché ho scelto Strategy 2</label>
+            <label class="check"><input type="checkbox" class="gate"> Ho applicato io il raccordo in CAD</label>
+            <label class="check"><input type="checkbox" class="gate"> Ho verificato fonte e trade-off</label>
+            <div class="pane-footer">
+              <p id="export-help" class="help">L’export macchina si abilita solo a checklist completa.</p>
+              <button type="button" class="btn primary" id="export" disabled aria-describedby="export-help">Autorizza export macchina</button>
+              <p class="success" id="done" hidden role="status">
+                <strong>Pronto per la revisione.</strong><br>
+                Asset: Tasto-Microonde.3mf<br>
+                <em>Progetta, non farti progettare.</em>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar" aria-label="Stato sessione">
+      <span>CoForma · desktop companion</span>
+      <span class="sep">·</span>
+      <span id="status-phase">Fase 01 · Priorità</span>
+      <span class="sep">·</span>
+      <span>Unità mm</span>
+      <span class="spacer"></span>
+      <span>Assistente: fonti obbligatorie</span>
+      <span class="sep">·</span>
+      <span id="status-clock"></span>
+    </footer>
+  </div>
+
+  <div class="chat-backdrop" id="chat-backdrop" hidden></div>
+  <aside class="chat-panel" id="chat-panel" hidden aria-label="Assistente CoForma">
+    <header class="chat-head">
+      <div>
+        <p class="pane-title">Assistente</p>
+        <p class="pane-sub">Bot fittizio · ogni risposta cita le fonti</p>
+      </div>
+      <button type="button" class="tool" id="chat-close" aria-label="Chiudi assistente">Chiudi</button>
+    </header>
+
+    <div class="chat-policy" role="note">
+      <strong>Policy fonti</strong>
+      Nessuna raccomandazione senza riferimento. Affidabilità e limiti sempre visibili.
+    </div>
+
+    <div class="chat-thread" id="chat-thread" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+    <div class="chat-suggestions" id="chat-suggestions" aria-label="Domande rapide">
+      <button type="button" class="suggest" data-q="Quanto spessore serve alla radice della clip?">Spessore clip</button>
+      <button type="button" class="suggest" data-q="Meglio PLA o PETG per questo tasto?">PLA vs PETG</button>
+      <button type="button" class="suggest" data-q="Come applico il fillet in CAD?">Guida fillet</button>
+      <button type="button" class="suggest" data-q="Quale strategy consigli per resistenza e assemblaggio?">Strategy consigliata</button>
+    </div>
+
+    <form class="chat-compose" id="chat-form">
+      <label class="sr-only" for="chat-input">Messaggio all’assistente</label>
+      <textarea id="chat-input" rows="2" placeholder="Chiedi sul pezzo, materiali, warning…" required maxlength="500"></textarea>
+      <button type="submit" class="btn primary" id="chat-send">Invia</button>
+    </form>
+  </aside>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

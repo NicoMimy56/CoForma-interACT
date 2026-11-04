@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheda lab PLA/PETG · snap-fit — CoForma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#0f1c2e; --teal:#0a7f8c; --muted:#5a6573; --line:#dce2ea; --bg:#f3f5f8; }
+    body { margin:0; font-family:"IBM Plex Sans",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.5; }
+    main { max-width:720px; margin:0 auto; padding:32px 20px 48px; }
+    a { color:var(--teal); }
+    h1 { font-size:1.4rem; margin:0 0 8px; }
+    .meta { font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--muted); margin-bottom:24px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; }
+    dl { display:grid; gap:12px; margin:0; }
+    dt { font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+    dd { margin:2px 0 0; }
+    .note { margin-top:16px; padding:12px; background:#e8f4f6; border-radius:8px; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="../../index.html">← Torna a CoForma</a></p>
+    <h1>Scheda laboratorio PLA / PETG — snap-fit</h1>
+    <p class="meta">Fonte interna CoForma · Affidabilità 3/5 · prototipazione</p>
+    <div class="card">
+      <dl>
+        <div>
+          <dt>Contesto</dt>
+          <dd>Valori indicativi di flessione e trazione per clip stampate FDM in PLA e PETG, usati solo per ranking interno delle Strategy sul pezzo Tasto Microonde.</dd>
+        </div>
+        <div>
+          <dt>Osservazioni tipiche</dt>
+          <dd>PETG tende a tollerare meglio scatti ripetuti; PLA è più fragile allo snodo ma utile per smoke-test. Spessori locali sotto soglia aumentano il rischio di cricca alla radice della clip.</dd>
+        </div>
+        <div>
+          <dt>Limiti</dt>
+          <dd>Non sostituiscono una prova di inserimento sul frontalino reale. Condizioni di stampa (orientamento, temperatura, umidità) influenzano il risultato.</dd>
+        </div>
+      </dl>
+      <p class="note">Usare questa scheda come riferimento qualitativo nelle raccomandazioni dell’assistente, sempre citando l’affidabilità 3/5.</p>
+    </div>
+  </main>
+</body>
+</html>

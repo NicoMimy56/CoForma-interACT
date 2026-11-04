@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parametri stampa progetto — CoForma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#0f1c2e; --teal:#0a7f8c; --muted:#5a6573; --line:#dce2ea; --bg:#f3f5f8; }
+    body { margin:0; font-family:"IBM Plex Sans",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.5; }
+    main { max-width:720px; margin:0 auto; padding:32px 20px 48px; }
+    a { color:var(--teal); }
+    h1 { font-size:1.4rem; margin:0 0 8px; }
+    .meta { font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--muted); margin-bottom:24px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; }
+    dl { display:grid; grid-template-columns:160px 1fr; gap:10px 16px; margin:0; }
+    dt { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+    dd { margin:0; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="../../index.html">← Torna a CoForma</a></p>
+    <h1>Parametri stampa progetto</h1>
+    <p class="meta">Metadati file Tasto-Microonde.3mf · Affidabilità 5/5</p>
+    <div class="card">
+      <dl>
+        <dt>Asset</dt><dd>Tasto-Microonde.3mf</dd>
+        <dt>Origine</dt><dd>Shapr3D → export 3MF</dd>
+        <dt>Layer</dt><dd>0.20 mm</dd>
+        <dt>Nozzle</dt><dd>Ø 0.4 mm</dd>
+        <dt>Mesh</dt><dd>~9 118 vertici · ~18 232 facce</dd>
+        <dt>BBox</dt><dd>~80 × 26 × 20 mm</dd>
+      </dl>
+      <p style="margin-top:16px;font-size:.9rem">Formato: <a href="https://3mf.io/specification/" target="_blank" rel="noopener noreferrer">3MF Specification</a></p>
+    </div>
+  </main>
+</body>
+</html>

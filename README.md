@@ -59,6 +59,7 @@ Studenti, maker e giovani progettisti che progettano e realizzano pezzi fisici:
 ```
 index.html                       sito GitHub Pages (resta nella radice)
 assets/
+Bozza-CoForma/                   bozza desktop companion (HTML/CSS/JS, flusso C3)
 Consegne/
 ├── C1-Needfinding/
 │   ├── 01-Documenti/          presentazione e relazione
